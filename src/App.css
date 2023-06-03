@@ -1,9 +1,9 @@
 .App {
    text-align: center;
-   display: flex;
-   justify-content: space-around;
-   background-image: url('../src/img/rick.jpg');
+   justify-content: space-between;
+   background-image: url('../src/img/rick2.jpg');
    background-repeat: no-repeat;
    background-size: cover;
    background-attachment: fixed;
+   min-height: 100vw;
 }
