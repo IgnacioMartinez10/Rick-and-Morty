@@ -55,6 +55,7 @@ function App() {
     const personajeFiltrados = characters.filter(
       (character) => character.id !== parseInt(id)
     );
+
     setCharacters(personajeFiltrados);
   };
 

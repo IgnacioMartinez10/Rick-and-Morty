@@ -1,6 +1,12 @@
 import Card from "../Card/Card";
 import { connect } from "react-redux";
-const Favorites = ({ myFavorites }) => {
+import { removeFav } from "../../redux/actions";
+
+const Favorites = ({ myFavorites, removeFav }) => {
+  // Define la función onClose para manejar el evento de cierre
+  const onClose = (id) => {
+    removeFav(id); // Llama a la acción removeFav para eliminar el favorito por su id
+  };
 
   return (
     <>
@@ -8,10 +14,9 @@ const Favorites = ({ myFavorites }) => {
         return (
           <Card
             key={fav.id}
-            name={fav.name}
-            gender={fav.gender}
-            species={fav.species}
-            image={fav.image}
+            id={fav.id}
+            character={fav}
+            onClose={onClose} // Pasa la función onClose al componente Card
           />
         );
       })}
@@ -19,10 +24,20 @@ const Favorites = ({ myFavorites }) => {
   );
 };
 
-const mapStateToProps = (state) => {
+// Mapea el estado de Redux a las props del componente
+export function mapStateToProps(state) {
   return {
-    myFavorites: state.myFavorites,
+    myFavorites: state.myFavorites, // Obtiene la lista de favoritos del estado global
   };
-};
+}
 
-export default connect(mapStateToProps, null)(Favorites);
+// Mapea las acciones de Redux a las props del componente
+export function mapDispatchToProps(dispatch) {
+  return {
+    removeFav: (id) => {
+      return dispatch(removeFav(id)); // Despacha la acción removeFav con el id como argumento
+    },
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Favorites);

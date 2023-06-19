@@ -32,9 +32,9 @@ function Form({login}) {
 
 
   return (
-    <div>
+    <div className={styles.container}>
       {/* // El evento ONSUBMIT Genera un refresh de la pagina. por eso se usa preventDefault en la funcion submitHandler */}
-      <form action="" onSubmit={submitHandler}>
+      <form className={styles.formContainer} action="" onSubmit={submitHandler}>
         <input type="text" placeholder="Ingrese su email" name="email" value={userData.email} onChange={handleChange} />
           {errors.email && <p>{errors.email}</p>}
         <input type="password" placeholder="Ingrese su contraseña" name="password" value={userData.password} onChange={handleChange}/>
