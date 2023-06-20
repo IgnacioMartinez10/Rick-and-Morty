@@ -23,6 +23,7 @@ function Detail() {
 
   if (Object.keys (character).length !==0) {
     return (
+      <div className={styles.container}>
       <div className={styles.card}>
         <img className={styles.cardImage} src={character.image} alt={character.name} />
         <div className={styles.cardBody}>
@@ -32,6 +33,7 @@ function Detail() {
           <p>{character.gender}</p>
           <p>{character.origin.name}</p>
         </div>
+      </div>
       </div>
     );
   }

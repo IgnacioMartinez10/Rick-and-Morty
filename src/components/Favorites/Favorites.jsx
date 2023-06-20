@@ -1,6 +1,7 @@
 import Card from "../Card/Card";
 import { connect } from "react-redux";
 import { removeFav } from "../../redux/actions";
+import styles from "./Favorites.module.css"
 
 const Favorites = ({ myFavorites, removeFav }) => {
   // Define la función onClose para manejar el evento de cierre
@@ -12,12 +13,17 @@ const Favorites = ({ myFavorites, removeFav }) => {
     <>
       {myFavorites.map((fav) => {
         return (
+          <div className={styles.containerFavs}>
+
+
+          
           <Card
             key={fav.id}
             id={fav.id}
             character={fav}
             onClose={onClose} // Pasa la función onClose al componente Card
           />
+          </div>
         );
       })}
     </>
