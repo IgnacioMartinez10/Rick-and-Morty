@@ -1,9 +1,10 @@
 import Card from "../Card/Card";
 import { connect } from "react-redux";
 import { removeFav } from "../../redux/actions";
-import styles from "./Favorites.module.css"
+import styles from '../Favorites/Favorites.module.css';
 
 const Favorites = ({ myFavorites, removeFav }) => {
+  
   // Define la función onClose para manejar el evento de cierre
   const onClose = (id) => {
     removeFav(id); // Llama a la acción removeFav para eliminar el favorito por su id
@@ -15,8 +16,6 @@ const Favorites = ({ myFavorites, removeFav }) => {
         return (
           <div className={styles.containerFavs}>
 
-
-          
           <Card
             key={fav.id}
             id={fav.id}

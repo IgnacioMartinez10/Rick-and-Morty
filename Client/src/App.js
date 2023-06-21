@@ -4,6 +4,7 @@ import Cards from "../src/components/Cards/Cards";
 import About from "./components/About/About";
 import Detail from "./components/Detail/Detail";
 import Form from "./components/Form/Form";
+import Error from "./components/Error/Error";
 import Favorites from "./components/Favorites/Favorites";
 import { useState, useEffect } from "react";
 import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
@@ -71,6 +72,7 @@ function App() {
         <Route path="/detail/:id" element={<Detail />} />
         <Route path="/" element={<Form login={login} />} />
         <Route path="/favorites" element={<Favorites onClose={onClose} />} />
+        <Route path="*" element={<Error/>}/>
       </Routes>
     </div>
   );
