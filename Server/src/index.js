@@ -1,17 +1,25 @@
-const http = require('http');
-const data = require("./utils/data");
-const getCharById = require ("./controllers/getCharById")
+const express = require('express');
+const server = express();
+const { router } = require('./routes/index')
+const morgan = require('morgan');
 const PORT = 3001;
-http
-  .createServer((req, res) => {
-    res.setHeader("Access-Control-Allow-Origin", "*"); // le damos permiso al front para que pueda hacer peticiones a nuestro back. 
 
-    if (req.url.includes("/rickandmorty/character")) {
-      const url = req.url.split("/"); // convierte la url en un array y la separa por cada "/".
-      //Ejemplo: ["", "rickandmorty", "character", "42"].
-      const id = Number(url.at(-1)); // se ubica en la ultima posicion del array, osea, en 42 y lo transforma a numero.  
-
-      getCharById(res, id);
-      console.log(getCharById);
-    }
-  }).listen(PORT);
+server.use(express.json());
+server.use(morgan('dev'));
+server.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Credentials', 'true');
+    res.header(
+        'Access-Control-Allow-Headers',
+        'Origin, X-Requested-With, Content-Type, Accept'
+    );
+    res.header(
+        'Access-Control-Allow-Methods',
+        'GET, POST, OPTIONS, PUT, DELETE'
+    );
+    next();
+});
+server.use('/rickandmorty', router);
+server.listen(PORT,()=>{
+    console.log('Servidor ON')
+})

@@ -9,6 +9,7 @@ import Favorites from "./components/Favorites/Favorites";
 import { useState, useEffect } from "react";
 import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { addFav } from "./redux/actions";
 
 function App() {
   const [characters, setCharacters] = useState([]);
@@ -18,13 +19,15 @@ function App() {
   const email = "ignaq@gmail.com";
   const password = "pepe123";
 
-  const login = (userData) => {
-    if (userData.email === email && userData.password === password) {
-      setAccess(true);
-      navigate("/home");
-    }
-  };
-
+  function login(userData) {
+    const { email, password } = userData;
+    const URL = 'http://localhost:3001/rickandmorty/login/';
+    axios(URL + `?email=${email}&password=${password}`).then(({ data }) => {
+       const { access } = data;
+       setAccess(data);
+       access && navigate('/home');
+    });
+ }
   useEffect(() => {
     !access && navigate("/");
   }, [access]);
@@ -52,7 +55,7 @@ function App() {
 
 
   const onClose = (id) => {
-    console.log(id);
+    console.log('Cerraste el personaje ' + id);
     const personajeFiltrados = characters.filter(
       (character) => character.id !== parseInt(id)
     );

@@ -1,9 +1,23 @@
 import Card from "../Card/Card";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import { removeFav } from "../../redux/actions";
 import styles from '../Favorites/Favorites.module.css';
+import { filterCards, orderCards } from "../../redux/actions";
 
 const Favorites = ({ myFavorites, removeFav }) => {
+
+
+  const dispatch = useDispatch();
+
+  const handleOrder = (event) => {
+    dispatch(orderCards(event.target.value));
+}
+
+const handleFilter = (event) => {
+  dispatch(filterCards(event.target.value));
+}
+
+
   
   // Define la función onClose para manejar el evento de cierre
   const onClose = (id) => {
@@ -12,10 +26,23 @@ const Favorites = ({ myFavorites, removeFav }) => {
 
   return (
     <>
+            <div>
+              <select name="" id="" onChange={handleOrder}>
+                <option value="A">Ascendente</option>
+                <option value="D">Descendente</option>
+              </select>
+
+              <select name="" id="" onChange={handleFilter}>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Genderless">Genderless</option>
+              <option value="unknown">Unknown</option>
+
+              </select>
+            </div>
       {myFavorites.map((fav) => {
         return (
           <div className={styles.containerFavs}>
-
           <Card
             key={fav.id}
             id={fav.id}
