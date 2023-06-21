@@ -32,26 +32,24 @@ function App() {
     !access && navigate("/");
   }, [access]);
 
-  const onSearch = (id) => {
-    axios(`http://localhost:3001/rickandmorty/character/${id}`)
-      .then(({ data }) => {
-        const existingCharacter = characters.find(
-          (character) => character.id === data.id
-        );
-
-        if (!existingCharacter) { // si el personaje no existe lo agrega, sino devuelve que "YA EXISTE"
-          setCharacters((oldChars) => [...oldChars, data]);
-        } else {
-          window.alert("¡Este personaje ya ha sido agregado!");
-        }
-      })
-      .catch(() => {
-        window.alert("¡No hay personajes con este ID!");
-      });
+  const onSearch = async (id) => {
+    try {
+      const response = await axios.get(`http://localhost:3001/rickandmorty/character/${id}`);
+      const data = response.data;
+      
+      const existingCharacter = characters.find((character) => character.id === data.id);
+  
+      if (!existingCharacter) {
+        setCharacters((oldChars) => [...oldChars, data]);
+      } else {
+        window.alert("¡Este personaje ya ha sido agregado!");
+      }
+    } catch (error) {
+      console.error(error);
+      window.alert("¡No hay personajes con este ID!");
+    }
   };
-
-
-
+  
 
 
   const onClose = (id) => {
