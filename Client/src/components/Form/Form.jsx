@@ -3,6 +3,7 @@ import { useState } from "react";
 import validation from "../Validation/validation";
 import styles from "../Form/Form.module.css";
 
+
 function Form({login}) {
 
   const submitHandler = (event) => {
@@ -22,11 +23,11 @@ function Form({login}) {
     // funcion para leer los cambios en los inputs en tiempo real, se va refrescando el estado
     SetUserData({
       ...userData,
-      [event.target.name]: event.target.value // preguntar por que se usan []
+      [event.target.name]: event.target.value // 
     });
     setErrors(validation({
       ...userData,
-      [event.target.name]: event.target.value // no entendi esto. 
+      [event.target.name]: event.target.value // 
     }))
   };
 
