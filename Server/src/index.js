@@ -2,7 +2,10 @@ const express = require('express');
 const server = express();
 const { router } = require('./routes/index')
 const morgan = require('morgan');
+const { conn } = require('./DB_connection');
 const PORT = 3001;
+
+conn.sync({force: true})
 
 server.use(express.json());
 server.use(morgan('dev'));
